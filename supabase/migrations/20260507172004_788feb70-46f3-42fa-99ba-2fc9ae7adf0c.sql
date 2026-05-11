@@ -63,7 +63,18 @@ CREATE POLICY "Admins can update products" ON public.products FOR UPDATE TO auth
 CREATE POLICY "Admins can delete products" ON public.products FOR DELETE TO authenticated USING (public.has_role(auth.uid(), 'admin'));
 
 -- Column-level: hide cost_price from anon and non-admins
-REVOKE SELECT (cost_price) ON public.products FROM anon, authenticated;
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'products'
+      AND column_name = 'cost_price'
+  ) THEN
+    REVOKE SELECT (cost_price) ON public.products FROM anon, authenticated;
+  END IF;
+END $$;
 
 -- Recreate products_public view as SECURITY INVOKER (no cost_price)
 DROP VIEW IF EXISTS public.products_public CASCADE;

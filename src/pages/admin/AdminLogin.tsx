@@ -74,7 +74,7 @@ export default function AdminLogin() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">{t("admin.email")}</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@dirlaffaire.com" className="w-full h-12 rounded-xl bg-card border border-border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" required maxLength={100} />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@admin.fr" className="w-full h-12 rounded-xl bg-card border border-border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" required maxLength={100} />
             </div>
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">{t("admin.password")}</label>
@@ -109,7 +109,7 @@ export default function AdminLogin() {
           <form onSubmit={handleForgotPassword} className="space-y-4">
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Email</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@dirlaffaire.com" className="w-full h-12 rounded-xl bg-card border border-border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" required maxLength={100} />
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@admin.fr" className="w-full h-12 rounded-xl bg-card border border-border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" required maxLength={100} />
             </div>
             <Button type="submit" disabled={loading} className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-heading text-base rounded-xl">
               {loading ? <><Loader2 size={16} className="animate-spin mr-2" /> Envoi...</> : "Envoyer le lien"}

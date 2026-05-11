@@ -1,6 +1,17 @@
 
 -- Restore cost_price for authenticated (admin) only, keep hidden for anon
-GRANT SELECT (cost_price) ON public.products TO authenticated;
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'products'
+      AND column_name = 'cost_price'
+  ) THEN
+    GRANT SELECT (cost_price) ON public.products TO authenticated;
+  END IF;
+END $$;
 
 -- Restrict storage listing on product-images bucket: only allow direct file access via name
 -- Disable broad SELECT, allow per-object access
